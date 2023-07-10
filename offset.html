@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>offset</title>
+</head>
+<body>
+    
+    위치 = offsetTop,offsetLeft 
+    크기 =  offsetHeight, offsetWidth
+
+    <article><!-- offset -->
+        <h2>offset</h2>
+        <div>
+            <img src="./img/04.jpg" alt="">
+            <img src="./img/05.jpg" alt="">
+            <img src="./img/06.jpg" alt="">
+        </div>
+        <p></p>
+
+        <style>
+            article{
+                
+                width: 20%; height:50vh; margin: 100px auto; padding: 10px; border: 5px solid #000;overflow:auto;
+                /* overflow:auto 의경우 지정된 영역을 벗어나면 스크롤을 생성시킴 */
+                /* overflow-y / -x :scroll 은 무조건 스크롤바를 보여줌 */
+            }
+            div{
+                position: relative; width: 2000px; height: 2000px;
+            }
+            img{width: 400px;}
+            p{
+                position: absolute; left: 0; top: 0;
+                border: 20px solid red; margin: 0;
+                box-sizing: border-box;
+                transition: 0.5s;
+            }
+        </style>
+
+        <script>
+            const elimg = document.querySelectorAll('img'),
+            elp = document.querySelector('p');
+
+            
+            elimg.forEach(function(v,k){
+
+                v.onclick = function(){
+                    let offset = {
+                        y:v.offsetTop,
+                        x:v.offsetLeft,
+                        w:v.offsetWidth,
+                        h:v.offsetHeight
+                    }
+                    elp.style = `left:${offset.x}px;top:${offset.y}px;width:${offset.w}px;height:${offset.h}px;`
+                    }
+            });
+
+            const elarit = document.querySelector('article');
+
+
+            console.log(elarit.getBoundingClientRect())
+            // 위치나 크기정보를 전부 가져오는 명령어
+            // console.log(elarit.getBoundingClientRect().width) 처럼 응용해 값하나만 추출가능
+
+            console.log(
+                elarit.offsetWidth,
+                elarit.clientWidth,
+                elarit.scrollWidth
+            )
+        </script>
+    </article>
+
+</body>
+</html>

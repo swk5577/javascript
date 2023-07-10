@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>object2</title>
+</head>
+<body>
+        <p></p>
+    <ul class = yuo>
+        <li>
+            <figure>
+                <p><img src="" alt=""></p>
+                <figcaption>
+                    <b></b>
+                    <p>개요</p>
+                    <p>개봉</p>
+                    <p>출연</p>
+                </figcaption>
+            </figure>
+        </li>
+    </ul>
+    
+    <script>
+        let m_data = {
+            '현재상영영화':[
+            {img:'./img/01.jpg',
+            title :"인디아나 존스: 운명의 다...", 
+            개요:'액션', 
+            시간 : '154분', 
+            개봉:"2023.06.28.", 
+            출연 :"해리슨 포드, 피비 월러-브리지, 매즈 미켈슨, 안..."},
+
+            {img:'./img/02.jpg',
+            title :"귀공자", 
+            개요:'액션', 
+            시간 : '154분', 
+            개봉:"2023.06.28.", 
+            출연 :"김선호, 강태주, 김강우, 고아라"}
+        ],
+
+            '개봉예정영화':[
+            {img:'./img/03.jpg',
+            title :"악마들", 
+            개요:'액션', 
+            시간 : '154분', 
+            개봉:"2023.06.28.", 
+            출연 :"장동윤, 오대환, 최귀화, 장재호, 손종학, 신승환"},
+
+            {img:'./img/04.jpg',
+            title :"디파티드", 
+            개요:'액션', 
+            시간 : '154분', 
+            개봉:"2023.06.28.", 
+            출연 :" "}
+        ]
+    };
+
+    const elLi = document.querySelector('.yuo'),
+    elp = document.querySelector('p');
+
+
+    for(cat in m_data){
+        console.log(m_data[cat]); // arr2 arr2  / cat = 현재상영2 , 개봉예정2
+        elp.innerHTML += `<button>${cat}</button>`
+    }
+
+    const elbut = document.querySelectorAll('button');
+
+
+    let fun = function(i){
+        elLi.innerHTML = '';
+
+    m_data[i].forEach(function(v2){
+
+    console.log(v2);
+    
+    elLi.innerHTML += `        <li><figure>
+        <p><img src="${v2.img}" alt=""></p>
+        <figcaption>
+            <b>${v2.title}</b>
+            <p>개요 ${v2.개요}</p>
+            <p>개봉 ${v2.개봉}</p>
+            <p>출연 ${v2.출연}</p>
+        </figcaption>
+    </figure>        </li>`
+})
+    };
+
+
+    elbut.forEach(function(v,k){
+
+        v.onclick = function(){
+            
+        console.log(v); // button 현재개봉 button
+        let i = this.innerText //this = 누른버튼
+            console.log(i); //현재상형영화
+            fun(i);
+        }
+    });
+
+    fun('현재상영영화')
+        
+
+    </script>
+
+    <style>
+        .yuo figure{
+            display: flex;
+        }
+
+        figure >p{
+            order: 2;            
+            flex: 1 0 ;
+        }
+        figure img{
+            width: 100%;
+        }
+        figcaption{
+            flex: 1 0 ;
+        }
+
+    </style>
+
+</body>
+</html>

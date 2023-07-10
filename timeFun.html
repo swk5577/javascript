@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>timeFun</title>
+</head>
+<body>
+
+    <article>
+        <h2>setInterval() / clearInterval()</h2>
+        <div>
+            <p>100%</p>
+        </div>
+
+        <style>
+            article{width: 500px; margin: 100px auto;}
+            .interval p {background-color: red; text-align: right; color: aliceblue;
+            width: 0;}
+        </style>
+
+        <script>
+            const elInterval = document.querySelector('.interval p')
+            
+            num = 0;
+            let inter = setInterval(function(){
+                if(num > 20){
+                    num++;
+                    elInterval.style = `width:${num}%`;
+                    elinterval.innertext = `${num}%`;
+                }else{
+                    clearInterval(inter); //인터벌을 멈춤 ()안에 변수를 넣으면 변수의 인터벌만 멈춤
+                }
+            },1000); //1000 1초 / 순서대로 찍히지않는 함수 (비동기)
+        </script>
+    </article>
+
+
+    <article class="slid">
+        <h2>ex) interval </h2>
+        <div>
+            <figure>
+                <img src="./img/01.jpg" alt="">
+                <img src="./img/02.jpg" alt="">
+                <img src="./img/04.jpg" alt="">
+            </figure>
+
+            <p>
+                <button data-name = "prev">prev</button>
+                <button data-name = "next">next</button>
+                <button data-name = "pause">pause</button>
+            </p>
+        </div>
+
+        <style>
+            div{overflow: hidden;}
+            figure{transition: 0.5s; display: flex; margin: 0;}
+            img{width: 100%;}
+        </style>
+
+        <script>
+            const   elslidbut = document.querySelectorAll('.slid button'),
+                    elslid = document.querySelector('.slid figure');
+                    
+
+                let n = 0;
+                elslidbut.forEach(function(btn){
+                btn.onclick = function(){
+                    console.log(this.dataset.name);
+                    if(this.dataset.name == "pause"){
+                        if(this.innerText == "pause"){
+                            clearInterval(slideInte);  //이미지를 클릭시 정지 기능
+                            this.innerText = "play"
+                        }else{
+                            loop()
+                            this.innerText = "pause"
+                        }
+                        slidePlay (this.dataset.name); //-대신 .name 으로 콜  class 대신 사용
+                }
+            }})
+
+                        
+
+                        // if(n < 3){n++;}
+                        // if(n > 0){n--;}
+                        
+
+                    if(n==2){
+                        const first = document.querySelector('.slid img:first-child')
+                        elslid.append(first.cloneNode());
+                    }
+
+                    let slidePlay = function(inn){
+
+                        if(inn == "next"){
+                            if(n < 2){n++;}
+                        }else{
+                            if(n > 0){n--;}
+                        }
+                        elslid.style = `transform:translateX(${-100*n}%)`;
+
+                    }
+
+                    let slideInterval;
+                    function loop (){
+                        slideInterval = setInterval(slidePlay,2000,"next"); //slidePlay('next')로 할경우 바로 실행해버림
+                    };
+
+                    loop();
+
+                    
+
+                    
+
+                        // this의경우 1번째 function의경우 선택된 인자를 대상으로보지만 1안의 2번째 function의 경우 function 자체를 
+                        // 대상으로 보기때문에 this를 사용하기 까다롭다
+        </script>
+
+    </article>
+</body>
+</html>

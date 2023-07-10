@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스크롤 기능섞어보기</title>
+</head>
+
+<body>
+    <header id="header">
+        <a>1</a>
+        <a>2</a>
+        <a>3</a>
+        <a>4</a>
+        <a>5</a>
+        <a>6</a>
+    </header>
+    <main>
+        <section data-name="0">01</section>
+        <section data-name="1">02</section>
+        <section data-name="2">03</section>
+        <section data-name="3">04</section>
+        <section data-name="4">05</section>
+    </main>
+
+    <style>
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transition: 1s;
+            width: 100%;
+            height: 10vw;
+            background-color: rgb(97, 29, 161);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 3vw;
+        }
+
+        header.active {
+            transform: translateY(-100%);
+        }
+
+        a.active {
+            color: red;
+        }
+
+        section {
+            margin-top: 5vw;
+            background-color: rgb(67, 67, 139);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3vw;
+
+        }
+    </style>
+
+
+
+    <script>
+        const elA = document.querySelectorAll('header a'),
+            elsection = document.querySelectorAll('section');
+
+
+        let re = 0, y=0,z=0;
+
+
+            //미완
+        const io = new IntersectionObserver(ela => {
+            ela.forEach(entry => {
+                    if(entry.intersectionRatio > 0){
+                        y = entry.target.dataset.name;
+
+                        console.log(y);
+                    }
+
+                        elA[z].classList.remove('active')
+                        elA[y].classList.add('active')
+
+                        z = y;
+
+            })
+        });
+
+
+        
+        function Ared(k){
+            elA[re].classList.remove('active')
+            elA[k].classList.add('active')
+
+                re = k;
+        }
+
+
+
+        //클릭시 글자 빨간색 + 이동
+        elA.forEach(function (v, k) {
+            v.onclick = function () {
+                elsection[k].scrollIntoView(
+                    { behavior: "smooth", block: "start" } //end는 하단에 맞춰서 이동
+                )
+                Ared(k)
+
+            }
+        })
+
+        elsection.forEach(function(v,k){
+
+            io.observe(v)
+
+        })  //대상이보이면 바로 실행
+
+
+         //스크롤 헤더 반응
+/*         let pos = {y1:0,y2:0,p:true}
+        window.onscroll = function(){
+            pos.y1 = window.pageYOffset;
+            if(pos.y1 > pos.y2){
+                header.classList.add('active')
+            }else{
+                header.classList.remove('active')
+            }
+            pos.y2=pos.y1;
+
+        } */
+
+
+    </script>
+
+</body>
+
+</html>

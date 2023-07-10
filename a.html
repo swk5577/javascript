@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>java</title>
+    <!-- <script src="스크립트문서"></script> -->
+</head>
+<body>
+
+    </div>
+    <div id="div"></div>
+
+    <script>
+        // 1. 모든 리소스를 로드후 실행
+        // 2. 콘텐츠 로드후 실행
+    // document.querySelector('div')
+    // 요청
+    
+    // document.getElementsByTagName('div')
+    // document.getElementById
+    // 단일 부를때는 s없음
+    // document.querySelector('div').명령=갱신할내용또는 명령
+
+    let element = document.querySelector('div')
+
+    element.innerText = 1000;
+    element.style = 'color:red'
+    element.className = 'test'
+
+
+    console.log(
+    );
+
+
+    let num = 1
+    element.onclick = function(){
+        element.innerText = 1000 * num;
+        ++num;
+    }
+
+
+
+
+
+
+    </script>
+
+
+    <script>
+        // // 스코프{} 
+        // 로컬변수 = {}안에서 선언
+        // 글로벌 변수 => 스크립트에서 선언 {}밖
+
+        let a = 100;
+        a+= 100;
+
+        console.log(`김나나${a}`);
+        // 문자와 변수를 같이 쓰고싶을때
+
+    </script>
+
+    <p style="white-space: pre-line;">
+
+    변수 선언시 주의사항
+    앞글자가 숫자가 되지않도록,
+    중간에 띄어쓰기가 없도록
+    break 처럼 스크립트 자체 명령어도 사용 할 수 없음
+
+    기억나는거
+
+    1. let = 계속변하는수
+    2. var = 호이스팅 현상을 일으키는 선언문 (상위로 끌어올려서 입력되는 현상)
+    3. const = 변하지않는 수
+    4. 텍스트, 함수 합치기 `텍스트${함수}`
+    5. +=  더하기
+    6. * 곱하기
+    7. log 하면 console.log 나온다그랬는데 왜 나는 안됨
+    9. 단축키안먹으면 시작줄에 한글입력기 바꾸기
+    10. script는 html 에 입력하는거였다
+    11. 스크립트의 {} 안에 입력하면 {}안에서만 사용할수 있다 밖에선 스크립트에서 다 사용가능
+
+    </p>
+
+</body>
+</html>

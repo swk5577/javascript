@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스크롤 이동</title>
+</head>
+
+<body>
+    <header id="header">
+        <a>1</a>
+        <a>2</a>
+        <a>3</a>
+        <a>4</a>
+        <a>5</a>
+        <a>6</a>
+    </header>
+    <main>
+        <section>01</section>
+        <section>02</section>
+        <section>03</section>
+        <section>04</section>
+        <section>05</section>
+    </main>
+
+    <style>
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transition: 1s;
+            width: 100%;
+            height: 10vw;
+            background-color: rgb(97, 29, 161);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 3vw;
+        }
+
+        header.active {
+            transform: translateY(100%);
+        }
+
+        a.active {
+            color: red;
+        }
+
+        section {
+            margin-top: 5vw;
+            background-color: rgb(67, 67, 139);
+            height: 20vw;
+        }
+    </style>
+
+
+
+    <script>
+        const elA = document.querySelectorAll('header a'),
+            elsection = document.querySelectorAll('section');
+
+        let re = 0;
+
+        elA.forEach(function (v, k) {
+            v.onclick = function () {
+                elsection[k].scrollIntoView(
+                    { behavior: "smooth", block: "start" } //end는 하단에 맞춰서 이동
+                )
+                this.classList.add('active')
+                elA[re].classList.remove('active')
+
+                re = k;
+            }
+        })
+
+
+    </script>
+
+</body>
+
+</html>

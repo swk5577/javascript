@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>array 배열</title>
+</head>
+<body>
+    
+    
+    <dl>
+        <!-- <div>
+        <dt>이름</dt>
+        <dd></dd> -->
+        
+    </dl>
+    <script>
+        // 선언방식 new Array(), []
+        // 값의 형식 key : value
+        
+        let a = new Array();
+        // 배열 선언 대문자 주의
+        a.push(10);
+        a.push(50);
+        // .push() = 배열의 뒤에 값을 추가함
+
+        console.log(a)
+        console.log(a[1])
+        console.log(a.length);
+        // length 전체 값의 개수
+
+        // a.forEach(function(value){명령 입력});
+        // name.forEach(function(v,k){})
+        //                     (v : k)  [arr]
+        //                   내용물:번호
+        // 사용 형태 
+
+
+        let name = ['곰','고양이','강아지','쥐'] ;
+        const elDd = document.querySelector('dl');
+
+
+        // elDd.forEach(function(v,k){
+        //     elDd[k].innerText = name[k];
+        // });
+
+        let tag = '';
+        // +=를 사용시에 tag = null이나 tag; 로만입력시 타입에 대한정보글(언디파인드)이 같이 표시되기때문에 '' 로만 입력
+
+        name.forEach(function(v,k){
+            if([v] != '강아지'){
+                elDd.innerHTML +=
+                                `<div>
+                                <dt>이름</dt>
+                                <dd>${v}</dd>
+                                </div>`;
+            }
+        });
+
+
+
+    </script>
+
+
+
+
+    <div class="yy">
+    </div>
+
+    <style>
+        img{
+            width: 30%;
+        }
+    </style>
+
+
+    <script>
+        let photo = ['../img/아아악.jpg','../img/강아지.jpg','../img/토끼.jpg'];
+        let pho ='';
+        const elimg = document.querySelector('.yy');
+
+        photo.forEach(function(v,k){
+            pho += `<img src="${v}" alt="${v}">`
+        });
+
+        elimg.innerHTML = pho;
+
+    </script>
+
+
+
+</body>
+</html>

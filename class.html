@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/class.css">
+    <title>class List</title>
+</head>
+<body>
+
+    <article class ="s1">
+        <h2>class(add,remove,toggle,contains)</h2>
+
+        <div>
+            콘텐츠가 움직임
+        </div>
+
+        <script>
+            const els1 = document.querySelector ('.s1');
+
+            els1.onclick = function(){
+                els1.classList.toggle('on') ; //클릭하면 반응 + 토글 > 껏다켯다
+
+            }
+
+            els1.className = 's1 on'; //off 지우기
+
+                els1.classList
+                els1.classList.add('on');
+                els1.classList.remove('off');
+
+            console.log(
+                els1.className,
+                els1.classList.contains('on')
+            );
+        </script>
+    </article>
+
+
+    <article class="s2"> <!-- 같은 순서일경우 -->
+        <h2>클릭버튼 활성화</h2>
+        <div>
+            <button>01</button>
+            <button>02</button>
+            <button>03</button>
+        </div>
+
+        <div class="cont">
+            <div>01 콘텐츠</div>
+            <div>02 콘텐츠</div>
+            <div>03 콘텐츠</div>
+        </div>
+
+        <script>
+            const els2but = document.querySelectorAll('.s2 button'), els2div = document.querySelectorAll('.s2 .cont div');
+
+            let num = 0;
+
+            els2but.forEach(function(v,k){
+                v.onclick = function(){
+                    els2but[num].classList.remove('active');
+                    this.classList.add('active');
+
+                    els2div[num].classList.remove('active');
+                    els2div[k].classList.add('active');
+                    num = k;
+                }
+            })
+        </script>
+    </article>
+
+    <article class="s3"> <!-- 다른 순서일경우 미완-->
+        <h2>클릭버튼 활성화</h2>
+        <div>
+            <button>01</button>
+            <button>02</button>
+            <button>03</button>
+        </div>
+
+        <div class="cont">
+            <div data="co3">01 콘텐츠</div>
+            <div data="co2">02  콘텐츠</div>
+            <div data="co1">03 콘텐츠</div>
+        </div>
+
+        <script>
+            const els3but = document.querySelectorAll('.s2 button'), els3div = document.querySelectorAll('.s2 .cont div');
+
+            let num2 = 0;
+
+            els3but.forEach(function(v,k){
+                v.onclick = function(){
+                    els3but[num2].classList.remove('active');
+                    this.classList.add('active');
+
+                    num = k;
+
+                    let dataName = this.dataset.name;
+
+                }
+            })
+        </script>
+    </article>
+
+    <article class="s4">
+        <h2>버거메뉴
+            <div>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </h2>
+        <nav>
+            <a href="#">메뉴 1</a>
+            <a href="#">메뉴 2</a>
+            <a href="#">메뉴 3</a>
+            <a href="#">메뉴 4</a>
+            <a href="#">메뉴 5</a>
+        </nav>
+
+        <script>
+            const les4h2 = document.querySelector('.s4 h2'),les4nav = document.querySelector('.s4 nav'),les4span = document.querySelectorAll('.s4 h2 span')
+
+            les4h2.onclick = function(){
+                les4span.forEach(function(v,k){
+                    les4span[k].classList.toggle('active')
+
+                })
+                les4nav.classList.toggle('active')
+
+                // 부모자체에 토글키로 클래스를 넣어 동시 css쪽에서 자식들을 작동시키는방법도 있다
+            }
+        </script>
+    </article>
+
+
+    <article class="s5">
+        <h2>아코디언</h2>
+        <ul>
+            <li>
+                <p>Q Js가 뭐여</p>
+                <div>document.queryselector</div>
+            </li>
+            <li>
+                <p>Q Js가 뭐여</p>
+                <div>document.queryselector</div>
+            </li>
+            <li>
+                <p>Q Js가 뭐여</p>
+                <div>
+                    document.queryselectordocument .queryselectordocument .queryselectordocument.queryselectordocument.queryselectordocument. queryselectordocument. queryselectordocument. queryselectordocument.queryselectordocument. queryselectordocument. queryselectordocument. queryselectordocument.queryselectordocument. queryselectordocument. queryselectordocument. queryselectordocument.queryselectordocument. queryselectordocument. queryselectordocument. queryselectordocument.queryselectordocument. queryselectordocument. queryselectordocument. queryselectordocument.queryselectordocument. queryselectordocument. queryselectordocument. queryselectordocument.</div>
+            </li>
+        </ul>
+
+        <script>
+            const els5li = document.querySelectorAll('.s5 li')
+
+            let s5num = 0;
+
+            els5li.forEach(function(v,k){
+                v.onclick = function(){
+
+                    console.log(this.children[1].offsetHeight);
+                    els5li[s5num].classList.toggle('active')
+
+                    if(s5num !== k){
+                        els5li[s5num].classList.remove('active')
+                        this.classList.add('active')
+                    }
+
+                    s5num = k;
+                }
+            })
+        </script>
+    </article>
+</body>
+</html>

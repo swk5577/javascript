@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>array-foreach</title>
+</head>
+<body>
+    
+    <div><!-- 버튼누르면 글자추가 -->
+        <article class="at">
+            <h2> 출석부 (<code></code>)</h2>
+            <p> 
+                <input type="text"> 
+                <button> 저장</button>
+
+            </p>
+
+            <ul>
+            </ul>
+
+        </article>
+
+        <script>
+            const eltxt = document.querySelector('.at input');
+            const elbut = document.querySelector('.at button');
+            const elul = document.querySelector('.at ul');
+            const elcot = document.querySelector('.at code');
+
+            let data = [];
+            let cot = 0;
+
+            elbut.onclick = function(){
+                // trim - 스페이스바 제거
+                if(eltxt.value.trim() !=''){
+                data.push(eltxt.value);
+                ulTag='';
+                ++cot ;
+
+                data.forEach(function(v,k){
+                    ulTag += `<li> ${v}</li>`;
+                    
+                })
+                elul.innerHTML = ulTag;
+                elcot.innerText = cot;
+
+                
+            }
+            }
+
+            
+
+
+        </script>
+    </div>
+
+
+    <div><!-- 버튼클릭시 ul태그안에 이미지 출력, 등록x시 콘솔 띄움 -->
+        <article class = "poto">
+            <h2> 이미지 등록 <button>추가</button>
+                <ul>
+                    <li><img src="../img/bird-g25cd8ea39_1280.png" alt=""></li>
+                </ul>
+            </h2>
+        </article>
+
+        <script>
+            const elpotobt = document.querySelector('.poto button'),
+            elpotoul = document.querySelector('.poto ul');
+
+            let imgs = ['../img/강아지.jpg','../img/고양이.jpg','../img/아아악.jpg'];
+
+            let pototag, cont=0;
+
+            elpotobt.onclick = function(){
+                if(cont < imgs.length){
+                    pototag = `<li><img src="${imgs[cont++]}"></li>`;
+                    elpotoul.innerHTML += pototag;
+                }else{
+                    alert("출력할 이미지가 없습니다");
+                    // 경고창
+                }
+                const elpotoLi = document.querySelectorAll('.poto li');
+                console.log(elpotoLi);
+                // 밖에다 쓰면 li가 전혀없는 상태만 인식하기때문에 click 시점에 생성되는 li를 나타내기 위해서는 onclick 명령어 안에 넣어줄 필요가 있음 
+
+                elpotoLi.forEach(function(v,k){
+                    // 클릭한 대상의 k 번호와 트리거를 알려줌
+                    elpotoLi[k].onclick=function(){
+                        alert(k);
+                        console.log(event.target);
+                        // 명령 내린것들에대한 세부사항을 볼수 있음
+                    }
+                })
+            }
+
+            function photoEvent(){
+                //함수 선언시 function 으로 선언가능
+            }
+
+            
+        </script>
+
+        <style>
+            img{
+                width: 20%;
+            }
+        </style>
+    </div>
+
+</body>
+</html>

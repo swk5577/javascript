@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>random</title>
+</head>
+<body>
+    
+    <script>
+         //무작위 숫자 
+        //.round() 반올림, 
+        //.floor 소수점제거,
+        //.ceil() 무조건 올림
+        console.log(Math.random());
+
+        let ran = Math.random() * 10;
+
+        console.log(`랜덤*10 ${ran}`)
+        console.log(`소수점 제거 ${Math.floor(ran)}`)
+        console.log(`무조건 올림 ${Math.ceil(ran)}`) //5까지만 표시하고싶을시 랜덤에 5를 곱하면됨
+        console.log(`반올림 ${Math.round(ran)}`)
+
+    </script>
+
+
+    <script> //난수로 배경색 넣기
+    let bg = function(n){
+       return Math.random(Math.random()) * n
+    }
+
+    const elBody = document.querySelector('body');
+
+    //elBody.style = 
+    //여러가지 스타일을 조정할때
+
+    elBody.style.background = `rgba(${bg(255)},${bg(255)},${bg(255)},${bg(100)}%)`;
+    //백그라운드 값만 조절
+
+
+        console.log( bg() );
+        // return이 없으면 실행은되는데 값ㅇ ㅣ반환되지 않음
+    </script>
+
+    <article class="random-img">
+        <h2></h2>
+        <p></p>
+        <img src="./img/" alt="">
+        
+        <script>
+            let imgs = ['01.jpg','02.jpg','03.jpg','04.jpg']
+            imgs[Math.round((Math.random() * 3))];
+
+
+            const elimg = document.querySelector('.random-img img');
+
+                    elimg.src = `./img/${imgs[Math.round(Math.random() * 3)]}`;
+
+
+            console.log( elimg.getAttribute('src')); //./img/01.jpg 처럼 입력된값을 직접적으로 알려줌  * get
+            console.log( elimg.setAttribute('src',`./img/${imgs[Math.round(Math.random() * 3)]}`));
+            // 위의 이미지를 랜덤으로 바꾸는 함수를 넣은(교체하기위한) 함수사용 방식 * set
+
+        </script>
+
+    </article>
+
+
+    <script>
+        let rand = function(n){
+            return Math.round(Math.random()*n);
+        }
+
+        let i=rand(10000), l=rand(10000);
+        console.log(
+            `i + l =
+            ${i} + ${l}
+            ${i+l}
+            `
+        );
+
+    </script>
+
+    
+
+    
+
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script> /* for ( in ) */
+
+        let obj = { html: 70, css: 80, js: 50, total: function () { return obj.html + obj.css + obj.js } }
+        // return을 넣어야 수를 밖으로 보내줌
+
+        obj['html']
+        // html-2 같이 -이 들어간경우 ''로 붙여줘야함 아래의방식에는 ''를 사용하지 못함, ''없을시 변수로 인식
+        obj.html  /* obj [ a, b, c] 의 변수 안의 html 을찾음 > 오류  / [a, b, c, html] > 참 */
+
+        for (const key in obj) {
+            // for ( in ) 조건이 맞는 모든 상황을 받을수 있음
+            console.log(key);
+            console.log(obj[key]);
+            console.log(`${key} : ${obj[key]}`);
+            // 속성 : 값
+            // .으로는 오브젝트끼리 합칠수없어서 [] 를 사용 obj.key 의경우 obj안에서 key인 값을 찾음
+        }
+
+
+        for (const key in obj) {
+            console.log(obj.total);
+            console.log(obj.total());
+            // 내용물이 4개다보니 4번반복
+        }
+
+    </script>
+
+
+    <script> /* []와 {}들 사이에서 불러오기 */
+            console.log(" ㅁ 원하는 내용 뽑기");
+
+        let data = {
+            imgName_1: {
+                size: [200, 300],
+                name: '이미지01',
+                url: 'http://naver.com'
+            }
+        }
+
+        console.log(
+            data.imgName_1.size[0],
+            // {}안에 있는 것들은 . 으로 불러낼수 있음
+            data.imgName_1.name,
+            data.imgName_1.url
+        );
+
+
+        let data2 = [
+            { name: 'p01', code: 123 },
+            { name: 'p02', code: 123 },
+            { name: 'p01', code: 123 }
+        ];
+
+        console.log(data2[1].name);
+
+
+        let data3 = {
+            생활용품: [
+                { 상품번호: 520734, 이름: '알뜨리 다용도 압축봉1', 가격: 14960, 색상: 'white', 이미지: 'imges', 크기: '80-150mm' },
+                { 상품번호: 520734, 이름: '알뜨리 다용도 압축봉2', 가격: 14960, 색상: 'white', 이미지: 'imges', 크기: '80-150mm' },
+                { 상품번호: 520734, 이름: '알뜨리 다용도 압축봉3', 가격: 14960, 색상: 'white', 이미지: 'imges', 크기: '80-150mm' },
+                { 상품번호: 520734, 이름: '알뜨리 다용도 압축봉4', 가격: 14960, 색상: 'white', 이미지: 'imges', 크기: '80-150mm' }
+            ],
+            캠핑용품: [
+                { 상품번호: 520734, 이름: '텐뚜', 가격: 14960, 색상: '까망', 이미지: 'imges', 크기: '1-3m' },
+                { 상품번호: 520734, 이름: '텐뚜', 가격: 14960, 색상: '까망', 이미지: 'imges', 크기: '1-3m' },
+                { 상품번호: 520734, 이름: '텐뚜', 가격: 14960, 색상: '까망', 이미지: 'imges', 크기: '1-3m' }
+            ]
+        };
+
+        /* 경로.forEach   이름을 뽑는법 */
+        data3.생활용품.forEach(function (v, k) {
+            console.log(v.이름);
+        })
+
+        /* 캠핑용품인, 곳에서 이름들을 찾는법 */
+        for (const v in data3) {
+            console.log(v);
+            if (v == '캠핑용품') {
+                console.log(data3[v]);
+                data3[v].forEach(function (v, k) {
+                    console.log(v.이름);
+                })
+            }
+        }
+    </script>
+
+
+
+    <article>
+        <h2>포트폴리오</h2>
+        <p>
+            <!-- <button>디자인</button>
+            <button>퍼블리셔</button>
+            <button>프론트엔드</button> -->
+        </p>
+
+        <ul class="list">
+            <!-- <li>
+                <a href="#">
+                    <figure>
+                        <img src="./img/04.jpg" alt="" width="200">
+                        <figcaption>
+                            작품명 : 삼성디자인 시안
+                            제작기간 : 10일
+                            요약설명 : 사용성
+                        </figcaption>
+                    </figure>
+                </a>
+            </li> -->
+        </ul>
+
+
+        <script>
+            console.log("ㅁ 원하는내용 뽑기 + 반복하기");
+
+            const elList = document.querySelector('.list'),
+                elp = document.querySelector('article >p');
+
+            let art = {
+                디자인: [
+                    { 작품명: '삼성디자인시안.', 제작기간: '5일', 요약설명: '삼성 디자인 시안', 이미지: './img/04.jpg', 링크: '#' },
+                    { 작품명: '엘지디자인시안.', 제작기간: '5일', 요약설명: '엘지 디자인 시안', 이미지: './img/01.jpg', 링크: '#' }
+                ],
+                퍼블리셔: [
+                    { 작품명: '엘지홈페이지.', 제작기간: '5일', 요약설명: '엘지 홈페이지', 이미지: './img/01.jpg', 링크: '#' }
+
+
+                ],
+                프론트엔드: [
+                    { 작품명: '모바일어플1.', 제작기간: '5일', 요약설명: '삼성 어플', 이미지: './img/01.jpg', 링크: '#' },
+                    { 작품명: '모바일어플2.', 제작기간: '5일', 요약설명: '엘지 어플', 이미지: './img/01.jpg', 링크: '#' }
+
+
+                ]
+            }
+
+            for (const k in art) {
+                elp.innerHTML += `<button>${k}</button>`
+            }
+
+
+            const elbtn = document.querySelectorAll('button');
+
+            // 함수를 내부에 담음
+            let printfun = function (key) {
+                elList.innerHTML = '';
+                art[key].forEach(function (obj) {
+                    console.log(key);  //디자인 , 퍼블리셔, 프론트엔드 key = this.innerText
+                    console.log(art[key]); //  art[디자인] => [{}{}]
+                    console.log(obj); //{작품명 : ......}  => art[디자인] 안의 {}
+                    elList.innerHTML += `
+                            <li>
+                            <a href="#">
+                                <figure>
+                                    <img src="${obj.이미지}"" width="200">
+                                    <figcaption>
+                                        작품명 : ${obj.작품명}
+                                        제작기간 : ${obj.제작기간}
+                                        요약설명 : ${obj.요약설명}
+                                    </figcaption>
+                                </figure>
+                            </a>
+                            </li>`})
+            }
+
+
+            elbtn.forEach(function (v, k) {
+
+                v.onclick = function () {
+
+                    let key = this.innerText;
+
+                    printfun(key);
+
+
+                    // art[key].forEach(function(obj){
+                    //     console.log(key);  //디자인 , 퍼블리셔, 프론트엔드 key = this.innerText
+                    //     console.log(art[key]); //  art[디자인] => [{}{}]
+                    //     console.log (obj); //{작품명 : ......}  => art[디자인] 안의 {}
+                    //     elList.innerHTML +=`
+                    //     <li>
+                    //     <a href="#">
+                    //         <figure>
+                    //             <img src="${obj.이미지}"" width="200">
+                    //             <figcaption>
+                    //                 작품명 : ${obj.작품명}
+                    //                 제작기간 : ${obj.제작기간}
+                    //                 요약설명 : ${obj.요약설명}
+                    //             </figcaption>
+                    //         </figure>
+                    //     </a>
+                    //     </li>`
+
+                    // })
+                }
+
+            });
+
+            printfun('디자인');
+
+
+        </script>
+    </article>
+
+
+    <article> <!-- 전부다 뿌려보기 -->
+        <h2></h2>
+        <div class="popol">
+            <div>  </div>
+            <div>  </div>
+            <div>  </div>
+        </div>
+
+        <script>
+            const elpopol = document.querySelectorAll('.popol > div');
+
+            console.log("ㅁ 전부다 뿌리기");
+            console.log(art);
+
+            let = num = 0;
+            // 많은양을 뿌릴때 유리
+            for(const v1 in art){
+                
+                art[v1].forEach(function(ele,k){
+                    console.log(`art[data] =`)
+                    console.log(art[v1])
+                    obj.작품명
+                    elpopol[num].innerHTML += v1;
+                })
+                num ++;
+            }
+
+
+            // 몇몇뽑아서 하기 유리
+
+            let datapro = Object.keys(art);
+
+            elpopol.forEach(function(ele,k){
+                let key = datapro[k];
+                console.log(datapro[k]);
+                art[key].forEach(function(obj){
+
+                    ele.innerHTML += art[key][0].작품명
+                })
+            
+            });
+        </script>
+    </article>
+
+</body>
+
+</html>

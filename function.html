@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>function</title>
+</head>
+<body>
+    
+    <script>
+        // function 네이밍(){}
+        // let 네이밍 = function(){}
+        // 둘중하나의 방식만 사용해도 괜찮다
+
+        let fun = function(받음){
+            console.log(받음);
+        };
+
+        fun('값'); // 위의방식으로 사용할경우 실행 시점 필요 
+        // ()안에 값을넣을경우 해당 변수안의 function에 값을 넘겨줄수 있다
+        // 단일수나 배열, 함수도 보낼수 있다
+
+        let alll = function(...받음){
+            console.log(받음);
+        };
+
+        fun(10,20,30,40,50);  //배열[]로 보내지않아도 받는곳이 ...이 앞에 붙어있다면 알아서 배열로 변함
+        // 1번째에 받는 수는 배열이아니라 값으로만 받고싶다면 값1,...값 하면됨
+
+        let gugu = function(num){
+            for(let i=1; i<=9; i++){
+            // 변수선언 / 비교문 / 증감
+            
+                console.log(`${num}x${i}=${num*i}`)
+            }
+        };
+
+        for(let n=2;n<=9;n++){
+
+            gugu(n);
+        }
+
+    </script>
+
+    <article>
+        <h2>구구단</h2>
+        <div class="btn">
+            <button>전체</button>
+        </div>
+        <ul>
+            <!-- <li>
+                <div class="result">
+                    
+                    
+
+                </div>
+            </li> -->
+        </ul>
+
+
+        <script>
+            const   elbut = document.querySelector('.btn'),
+                    elresu = document.querySelector('.result'),
+                    elul = document.querySelector('ul');
+
+
+            for(let i=2; i<=9; i++){
+                elbut.innerHTML += `<button>${i}</button>`
+            };
+            const elbutnum = document.querySelectorAll('button');
+
+
+            let gugudan = function(num){
+
+                let str = '';
+
+                str += `<li><b>${num}단</b>`
+
+                for(let i=1;i<=9;i++){
+                    str +=`<p>${num}x${i}=${num*i}</p>`
+                }
+                str += '</li>'
+
+                elul.innerHTML += str;
+
+                //함수안에 쌓아서 출력하는 방식
+
+            };
+
+
+            let all = function(){
+                for(let i=2;i<=9;i++){
+                    gugudan(i)
+                }
+            };
+
+
+            elbutnum.forEach(function(v){
+                v.onclick = function(){
+                    elul.innerHTML = '';
+                    let num = this.innerText
+
+                    if(num == '전체'){
+                        all()
+                    }else{
+                        gugudan(num)
+                    }
+                    
+                }
+            })
+            
+            all()
+            
+        </script>
+    </article>
+
+
+    <article class="count">
+        <h2>setinterval / count</h2>
+        <div>10</div>
+        <div>10</div>
+        
+
+        <script> //무한 반복 + 카운터
+        const elcount = document.querySelectorAll('.count div');
+
+        let count = [];
+
+        elcount.forEach(function(el){
+            count.push(Number(el.innerText));
+            el.innerHTML = 0;
+        })
+        
+
+
+        let startcount = function(k){
+            let sNum = 0;
+            setInterval(function(){
+                if(sNum < count[k] ){sNum++;}
+                
+                elcount[k].innerHTML = sNum;
+            },1000) //<< 시간 1000 =1초  기본값 0
+        }
+
+        elcount.forEach(function(v,k){
+            startcount(k)
+        })
+
+
+        setInterval(() => {
+            
+        }, interval);
+
+        </script>
+    </article>
+
+</body>
+</html>

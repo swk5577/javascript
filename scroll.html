@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scroll</title>
+</head>
+<body>
+    
+    <article>
+        <h2>콘텐츠 위치 확인후 활성화</h2>
+        <figure>
+            <p><img src="./img/04.jpg" alt=""></p>
+            <p><img src="./img/05.jpg" alt=""></p>
+            <p><img src="./img/06.jpg" alt=""></p>
+            <p><img src="./img/07.jpg" alt=""></p>
+            <p><img src="./img/08.jpg" alt=""></p>
+            <p><img src="./img/09.jpg" alt=""></p>
+        </figure>
+
+        <style>
+            img{opacity: 0; transform: translateX(-100%); transition: 0.5s;}
+            img.on{opacity: 1; transform: translateX(0);}
+        </style>
+
+        <script>
+            function init(){
+                const elimg = document.querySelectorAll('article figure p img');
+
+                let imgArr = [];
+
+                console.log(
+                    document,
+                    document.documentElement,
+                    document.documentElement.scrollHeight
+                );
+                //HTML의 총높이를 알아보는 명령어
+
+                elimg.forEach(function(v,k){
+                    imgArr.push(v.getBoundingClientRect()) ;
+                })
+                console.log(imgArr);
+
+                let winH = window.innerHeight;
+
+                function scrollfun(){
+                        imgArr.forEach(function(v1,k1){
+                        console.log(window.pageYOffset)
+                        //스크롤 내린 위치를 알려줌
+                        if( window.pageYOffset > v1.y-v1.height/2){
+                            elimg[k1].classList.add('on');
+                        }else if(window.pageYOffset < v1.y-v1.height/2){
+                            elimg[k1].classList.remove('on');
+                        }
+                        
+                    })
+                }
+                    window.onscroll = scrollfun
+                //윈도우를 스크롤 한때
+
+                
+
+                
+            }
+
+            window.onload = init;
+            // 윈도우가 로드 된시점에 함수를 실행
+
+
+
+        </script>
+
+    </article>
+
+    <article> <!-- 위의 동작 명령어로 -->
+
+        <script>
+            const io = new IntersectionObserver(entries => {
+                //위치를 감지
+                entres.forEach(entry => {
+                    if(entry.intersectionRatio > 0){
+                        entry.target.classList.add('active');
+                    }
+                })
+            })
+
+            io.observe(elimg[0]) //<<감지할 대상 / 각각의 이미지에 모두 넣어줘야 실행
+        </script>
+
+    </article>
+
+</body>
+</html>
