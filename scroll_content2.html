@@ -1,115 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>스크롤 방향</title>
+    <title>Document</title>
 </head>
+<body >
+    <!-- scroll_content.html -->
 
-<body>
     <header id="header">
-        <a href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">6</a>
+        <a> menu01 </a>
+        <a> menu02 </a>
+        <a> menu03 </a>
+        <a> menu04 </a>
+        <a> menu05 </a>
     </header>
+
     <main>
         <div>
-            <section>01</section>
-            <section>02</section>
-            <section>03</section>
-            <section>04</section>
-            <section>05</section>
+            <section >01</section>
+            <section >02</section>
+            <section >03</section>
+            <section >04</section>
+            <section >05</section>
         </div>
     </main>
-
     <style>
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            transition: 1s;
-            width: 100%;
-            height: 10vw;
-            background-color: rgb(97, 29, 161);
+        main{position:fixed; left:0; top:0; width:100%; height:100%;}
+        header{
+            position: fixed; left:0; top:0;
+            width:100%; padding:20px 0;
+            text-align: center;
+            background-color: rgba(0,0,0,0.6);
+            color:white;
+            transition: 1s; z-index: 999;
+        }
+        header a{cursor:pointer}
+        header a.active{
+            color:rgb(255, 0, 0);
+        }
+        header.active{
+            transform: translateY(-100%);
+        }
+        section{
+            font-size:5rem;
+            width:100%; height:100vh;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            font-size: 3vw;
+        }
+        section:nth-child(2n){
+            background-color: #eee;
         }
 
-        header.active {
-            transform: translateY(100%);
-        }
+        main > div{transition:1s;}
 
-        main {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-        }
 
-        main>div {
-            transition: 1s;
-        }
-
-        section {
-            margin-top: 5vw;
-            background-color: rgb(67, 67, 139);
-            height: 20vw;
-        }
     </style>
 
-
-
     <script>
-        /* window.onscroll = function(){} */
+        let pos = {y:0,y2:0,status:true};
+        let num = 0, timeOut;
+        const   elMenus = document.querySelectorAll('header a'),
+                elSection = document.querySelectorAll('section'),
+                allContents = document.querySelector('main > div');
 
-        let pos = { y: 0, y2: 0, status: true }, num = 0;
+        let secArr = [];
+            elSection.forEach(function(ele){
+                secArr.push(  ele.getBoundingClientRect()  );
+            })
 
-        const elmenus = document.querySelectorAll('header a'),
-            elsection = document.querySelectorAll('section'),
-            allcontents = document.querySelector('main > div');
-
-
-        document.body.style = `height:${allcontents.offsetHeight}px`; // 디브값을 바디로
-
-        // '이벤트를 추가'하는 방법 - 이미 이벤트가 걸려잇으면 또 넣을수 없으니 그때 사용하는 방법 / 선호하는 방식은 아니지만 필요할수 있음        
-
-        let secArr = [], timeQut = '';
-        elsection.forEach(function (v, k) {
-            secArr.push(v.getBoundingClientRect())
-        });
-
-        window.addEventListener('scroll', function () {
+        document.body.style = `height:${allContents.offsetHeight}px`;
+        
+        window.addEventListener('scroll',function(){ 
             pos.y = window.pageYOffset;
-
-            pos.status = (pos.y > pos.y2) ? true : false  //삼항 연산자 방식
+            pos.status = (pos.y > pos.y2) ? true : false;
             pos.y2 = pos.y;
 
-            clearTimeout(timeQut)
 
-            timeQut = setTimeout(function () {
-                try {
-                    allcontents.style = `transform:translateY(-${secArr[num].y}px)`
+            // allContents.style = `transform:translateY(-${pos.y}px)`;           
+
+            //섹션한칸씩 슬라이드
+            clearTimeout(timeOut);
+            timeOut = setTimeout(function(){
+                try{
                     pos.status ? num++ : num--;
-                }catch {
-                    pos.status ? num =secArr.length-1:num=0; }
-            }, 100)
+                    allContents.style = `transform:translateY(-${secArr[num].y}px)`;
+                    console.log(secArr[num].y) 
+                }catch{ 
+                    // try에서 에러가나면 catch로 보냄
+                    pos.status ? num= secArr.length-1 : num=0;
+                }// finally{
+                //     무조건 실행
+                // }
+            },100)
+            
 
-        if (pos.status) { header.classList.add('active') }
-        else { header.classList.remove('active') }
 
-                
-                
-        }) 
+
+        })
+        
+
+
     </script>
 
-</body>
 
+
+
+
+</body>
 </html>

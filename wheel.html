@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <main>
+        <section>01</section>
+        <section>02</section>
+        <section>03</section>
+        <section>04</section>
+        <section>05</section>
+
+        <aside></aside>
+    </main>
+
+    <style>
+        section{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: beige;
+        }
+        section:nth-child(2n){background-color: aquamarine;} 
+
+        aside{
+            position: fixed; right: 5%; top:50%
+        }
+        aside a{
+            width : 10px; height: 10px; margin: 10px 0; display: block;
+            background-color: black; border-radius: 100%;}
+
+        aside a.active{
+            background-color: rgb(255, 0, 212);}
+    </style>
+    
+    <script>
+        const elsection = document.querySelectorAll('section'),
+                elaside = document.querySelector('aside');
+
+        let move = 0;
+
+        elsection.forEach(function(v,k){
+            elaside.innerHTML += `<a></a>`
+            v.addEventListener('wheel', function(e){
+            console.log(e.wheelDelta); //휠값을 찍어줌
+
+            conmove(k)
+        
+        })
+        })
+
+        const ela = document.querySelectorAll('aside a');
+        let = c = 0;
+
+        ela.forEach(function(v,k){
+            v.onclick = function(){
+                move = elsection[k].offsetTop;
+                console.log(elsection[k].offsetTop);
+                ela[c].classList.remove('active')
+                ela[k].classList.add('active')
+
+                c = k;
+
+                window.scrollTo({
+                top : move,
+                left : 0,
+                behavior:'smooth'
+
+            });
+            }
+
+
+        })
+
+        function conmove(k){
+            try{
+                if(event.wheelDelta < 0){
+                console.log('내림',elsection[k].nextElementSibling);
+                move = elsection[k].nextElementSibling.offsetTop
+            }else{
+                console.log('올림',elsection[k].previousElementSibling);
+                move = elsection[k].previousElementSibling.offsetTop;
+            }
+            }catch{}
+            
+            window.scrollTo({ //휠이 이동하게함
+                top : move,
+                left : 0,
+                behavior:'smooth'
+
+            });
+
+        }
+
+
+
+
+    </script>
+
+</body>
+</html>

@@ -23,6 +23,8 @@
         <section data-name="2">03</section>
         <section data-name="3">04</section>
         <section data-name="4">05</section>
+        <section data-name="5">06</section>
+
     </main>
 
     <style>
@@ -69,8 +71,7 @@
 
         let re = 0, y=0,z=0;
 
-
-            //미완
+        // 보고있는 화면에 반응 해서 글자색을 변환시킴
         const io = new IntersectionObserver(ela => {
             ela.forEach(entry => {
                     if(entry.intersectionRatio > 0){
