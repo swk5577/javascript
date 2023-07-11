@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex3</title>
+</head>
+<body>
+    <!-- 스크롤 방향 체크
+    스크롤 값 pageYOffset / pageXOffset
+    오브젝트 정보 getBoundingClientRect()
+    스크롤이 있는 오브젝트 크기
+
+    일정시간후 실행 setTimeOut / clearTimeOut
+    addEventListener(function(){})
+    wheel / event.wheelDelta (휠내림 - / 올림 +) -->
+
+
+    <style>
+        article{width: 50% ;margin:200px auto; border: 1px solid #000;
+        padding: 60px}
+    </style>
+
+
+    <article class="ex1"><!-- 스크롤방향 ex -->
+        <h2>스크롤 방향 체크</h2>
+        <div> 스크롤 up, down시 클래스를 넣거나 삭제하시오</div>
+
+        <style>
+            .ex1 {overflow: hidden;}
+            .ex1 div{background-color: antiquewhite; transition: 1s;}
+            .ex1 div.remu{transform: translateX(150%);}
+        </style>
+
+        <script>
+            const el1div = document.querySelector('.ex1 div')
+
+            let pos ={y1:0, y2:0, tul:true}
+
+            window.onscroll = function(){
+                pos.y1 = window.pageYOffset
+
+                pos.tul = (pos.y1 > pos.y2) ? true:false
+
+                pos.tul ? el1div.classList.add('remu') : el1div.classList.remove('remu')
+                pos.y2 = pos.y1
+            }
+
+        </script>
+
+    </article>
+
+
+
+    <article class="ex2"><!-- page YOffset 활용 -->
+        <h2>스크롤 PageYoffset 활용</h2>
+        <div>
+            <p>텍스트의 크기를 키우거나 줄이시오</p>        
+            <div class="roll"></div>
+        </div>
+
+
+        <style>
+            .ex2 {overflow: scroll; height: 10vw; position: relative;}
+            .ex2 div p{position: absolute; top:0; left: 0;}
+            .ex2 div .roll{ width:100%; height: 100vh; position: absolute; top:0; left: 0;}
+        </style>
+
+        <script>
+            let r=0;
+            const el2p = document.querySelector('.ex2 div p'),elroll = document.querySelector('.ex2');
+
+            elroll.onscroll = function(e){
+                
+                            r = this.scrollTop //엘리먼트의 좌표값 얻는법
+                            el2p.style = `top:${r}px; font-size:${r/10+1}px;`
+
+            }
+        </script>
+
+
+    </article>
+
+
+
+    <article class="ex3"><!-- 오브젝트 getBoundingClientRect -->
+        <h2>오브젝트 getBoundingClientRect</h2>
+        <div>스크롤시 뷰포트화면에 해당 내용이 나오면 애니메이션을 주시오</div>
+
+
+        <style>
+            .ex3.active{animation: su 2s infinite;}
+            @keyframes su{
+                0%{border:5px dashed olive;}
+                50%{border:1px dashed olive;}
+                100%{border:5px dashed olive;}
+            }
+        </style>
+
+        <script>
+            const el3 = document.querySelector('.ex3'),
+                oi3 = new IntersectionObserver(el3w => {
+                    
+                    el3w.forEach(el3in =>{
+
+                        el3.classList.toggle('active',el3in.isIntersecting) //isIntersection 은 true / felse를 내보냄
+
+                    })
+
+                        
+                        
+
+                
+                },{threshold: 0.3})
+            
+
+
+
+
+            oi3.observe(el3);
+
+
+        </script>
+
+    </article>
+
+
+    <article class="ex4"> <!-- 스크롤 가로크기 구해서 분배하기 -->
+        <h2>ex4) 오브젝트 scrollWidth</h2>
+        <div> 
+            <p>
+                1. 스크롤 오브젝트(div)의 전체 크기를 구하시오.<br>
+                2. li태그에 width값을 넣으시오.(전체크기 3등분)
+            </p>
+            <ul><li>01</li><li>02</li><li>03</li></ul>
+        </div>
+        <style>
+            .ex4 div{overflow-x:scroll;}
+            .ex4 p{width:1900px}
+            .ex4 ul{
+                display: flex; 
+                margin:0; padding:0; 
+                list-style: none;
+            }
+            .ex4 ul li{
+                display:inherit;
+                align-items: center;
+                border:1px solid #000; height:200px;
+                flex-shrink: 0;
+            }
+
+        </style>
+
+
+        <script>
+            const el4li = document.querySelectorAll('.ex4 ul li'), el4div = document.querySelector('.ex4 div');
+            
+            let liw = 0;
+
+                liw = el4div.scrollWidth / 3
+
+                el4li.forEach((v,k) => {
+                    el4li[k].style = `width:${liw}px;`
+                })
+
+        </script>
+    </article>
+
+
+
+    <article class="ex5">
+        <h2>ex5) 일정시간 후 실행(setTimeOut) </h2>
+        <div>
+            뷰포트화면에 해당 콘텐츠가 보이면 
+            figure 자손으로 이미지 3개를 출력하시오.(단 0.3초 간격으로 출력)
+            <figure>
+            </figure>
+        </div>
+        <style>
+            .ex5 figure{margin:0;}
+            .ex5 figure img{width:200px; height: 150px; object-fit: cover;}
+        </style>
+
+        <script>
+            const el5 = document.querySelector('.ex5'), el5fig = document.querySelector('.ex5 figure'),
+
+            oi5 = new IntersectionObserver(oi5a =>{
+                oi5a.forEach(oi5in =>{
+
+                    console.log(oi5in.isIntersecting);
+                    if(oi5in.isIntersecting){
+                        let i2 = 3;
+                        for(i=0;i<3;i++){
+                            setTimeout(function(){
+                            i2++;
+                            el5fig.innerHTML += `<img src="./img/0${i2}.jpg" alt="">`
+                        },1000*i)
+                    } 
+                    clearTimeout();
+                        
+
+                    }
+                        
+
+
+                    })
+                    
+                    
+
+                });
+
+            let timig =function(){
+                setTimeout(function(){
+                            el5fig.innerHTML = `<img src="./img/0${i}.jpg" alt="">`
+                        },300);
+            }
+
+            oi5.observe(el5)
+
+        </script>
+
+    </article>
+</body>
+</html>

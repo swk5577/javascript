@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>intersection</title>
+</head>
+<body>
+    
+    <article>
+        <h2>intersectionObserver</h2>
+        <div class="btn">
+        </div>
+
+        <style>
+            .btn{height: 500px; overflow-y: scroll;}
+            .btn::-webkit-scrollbar{display: none;} /* 스크롤을 숨김 */
+            button{width: 150px; display:block; margin: 20px 0;
+                transform: translateX(100%); opacity: 0; transition: 1s;
+            }
+            button.on{transform: translateX(0%); opacity: 1;}
+
+        </style>
+
+        <script>
+            const elbtn = document.querySelector('.btn')
+
+            for(i=0; i<100; i++){
+                let button = document.createElement('button')
+                button.append(`테스트결과물 ${i}`)
+                elbtn.append(button)
+                // elbtn.innerHTML += `<button> 버튼${i}</button>`
+            }
+
+            const buttons = document.querySelectorAll('.btn button')
+
+            function contents(entries,observer){
+                entries.forEach(function(entry){
+
+                    
+                    if(entry.isIntersecting){
+                        entry.target.classList.add('on') 
+                        observer.unobserve(entry.target) //감지를중지
+                    }else {
+                        entry.target.classList.remove('on')
+                    }
+                    
+                })
+            };
+
+            let opt = {
+                root : elbtn, //실행될 장소 브라우저 
+                rootMargin:'-100px', // 인식될 장소 범위의 마진
+                threshold : 0 //얼마나 보여야 작동하는가
+            }
+
+            const intersection = new IntersectionObserver(contents,opt);
+
+            buttons.forEach( btn =>{
+                intersection.observe(btn);
+            })
+        </script>
+    </article>
+</body>
+</html>
