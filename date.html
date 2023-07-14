@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let today = new Date();
+        console.log(
+            today,
+            today.getFullYear(),
+            today.getMonth()+1 /* 0을 1월로 표기 */,
+            today.getDate(),
+            ['일','월','화','수','목','금','토'][today.getDay()], /* 요일 / 일요일이 0 */
+            today.getHours(),
+            today.getMinutes(),
+            today.getSeconds(),
+
+            today.getTime() /* 밀리초 단위로 나옴 24*60*60*1000 */
+
+        );
+
+
+
+        let day3 = new Date('2023-08-15');
+        console.log(Math.ceil((day3 - today)/(24*60*60*1000)));
+
+        console.log(
+            today.getSeconds(),
+            today.setSeconds(today.getSeconds() + 10)
+            /* get이 아닌 set을쓰면 바꾸는것도 가능 */
+        );
+    </script>
+
+    <article>
+        <h2>하루동안 보지않기팝업</h2>
+        <figure><img src="./img/05.jpg" alt=""></figure>
+        <input type="checkbox"> <!-- 10초동안 보지않기 -->
+        <button>닫기</button>
+
+        <style>
+            article{
+                width: 200px;
+                position: fixed;
+                left: 50%; top: 50%; transform: translate(-50%,-50%);
+            }
+            img{
+                width: 100%;
+            }
+            figure{margin: 0;}
+        </style>
+
+        <script>
+            
+
+            const closeBtn = document.querySelector('button'),
+                checkBox = document.querySelector('input'),
+                popup = document.querySelector('article');
+
+                closeBtn.onclick = function(){
+                    if(checkBox.checked){
+                        let popDay = new Date();
+                        popDay.setSeconds(popDay.getSeconds()+10);/* 10초뒤 => 1일뒤는 Date로 하고 +1 */
+                        document.cookie = `event = oneday; expires = ${popDay.toUTCString()}`; /* 쿠키에 값 남기는 법 */
+                                            /*이름 = 값    expires  = 시간  */
+                    }
+                    popup.style.display = 'none';
+                }
+
+                console.log(document.cookie)
+
+                if(document.cookie.match('oneday')){
+                    popup.style.display = 'none';
+                }else{
+                    popup.style.display = 'block';
+                }
+
+                
+        </script>
+    </article>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="../../css/class.css">
+    <title>Document</title>
+</head>
+<body>
+
+<!--     <header>
+        <ul>
+            <li>
+                <a href="#">01</a>
+                <div>
+                <a href="#">sub01</a>
+                <a href="#">sub02</a>
+                <a href="#">sub03</a>
+                </div>
+            </li>
+
+            <li>
+                <a href="#">02</a>
+                <div>
+                <a href="#">sub01</a>
+                <a href="#">sub02</a>
+                <a href="#">sub03</a>
+                </div>
+            </li>
+        </ul>
+    </header> -->
+
+    <style>
+        header{
+            background-color: black;
+            text-align: center;
+        }
+        header ul{
+            display: flex;
+            justify-content: center;
+        }
+        header ul a{
+            display: block; color: white;
+        }
+        header ul div{
+            position: absolute;
+            left:0; top: 100%;
+            background-color: green;
+            width: 100%;
+            display: none;
+        }
+        header ul li{
+            position: relative; padding:40px
+        }
+    </style>
+
+
+    <script>
+        $('header li').on('mouseenter',function(){
+            $('li>div').stop().slideUp();
+            $(this).find('div').stop().slideDown();
+            //stop 은 실행중인 애니메이션을 정지 시켜오류를 줄여줌
+            // slideToggle / slideDown / slideUp
+        })
+    </script>
+
+
+
+
+    <article class="fade">
+        <h2>fade</h2>
+            <div>
+            <button> < </button>
+            <button> > </button>
+            </div>
+        <figure>
+            <img src="../img/05.jpg" alt="">
+            <img src="../img/06.jpg" alt="">
+            <img src="../img/07.jpg" alt="">
+        </figure>
+
+
+
+        <style>
+            .fade figure{width : 400px; position: relative;}
+            .fade figure img{
+                width:inherit;/* 부모의 크기를 그대로 상속 */
+                position: absolute; left: 0; top: 0;
+            } 
+            /* not으로하면 제외하고< 라는뜻이됨 */
+            .fade figure img:not(:nth-of-type(1)){
+                display: none;
+            }
+        </style>
+
+        <script>
+            let num = 0;
+            // let = inter = setInterval(()=>{
+
+            //     $('.fade img').eq(num).fadeOut(1000);
+            //     num++;
+            //     if(num == 3){num = 0;}
+            //     $('.fade img').eq(num).fadeIn(1000);
+            // },3000);
+
+            $('.fade button').on('click',function(){
+
+                $('.fade img').eq(num).fadeOut(1000);
+                if($(this).index()){ //if문은 0을 flese로 인식, 나머지숫자를 true로 인식함
+                    if(num < 2 ){
+                        num++;
+                    }else{
+                        num = 0;
+                    }
+                }else{
+                    if(num > 0 ){
+                        num--;
+                    }else{
+                        num = 2;
+                    }
+                }
+                $('.fade img').eq(num).fadeIn(1000);
+            })
+            
+            
+        </script>
+    </article>
+
+
+
+
+    <article class="s5" style="margin: 500px auto;">
+        <h2>아코디언</h2>
+        <ul>
+            <li>
+                <p>Q Js가 뭐여</p>
+                <div>document.queryselector</div>
+            </li>
+            <li>
+                <p>Q Js가 뭐여</p>
+                <div>document.queryselector</div>
+            </li>
+            <li>
+                <p>Q Js가 뭐여</p>
+                <div>
+                    document.queryselectordocument .queryselectordocument .queryselectordocument.queryselectordocument.queryselectordocument. queryselectordocument. queryselectordocument. queryselectordocument.queryselectordocument. queryselectordocument. queryselectordocument. queryselectordocument.queryselectordocument. queryselectordocument. queryselectordocument. queryselectordocument.queryselectordocument. queryselectordocument. queryselectordocument. queryselectordocument.queryselectordocument. queryselectordocument. queryselectordocument. queryselectordocument.queryselectordocument. queryselectordocument. queryselectordocument. queryselectordocument.</div>
+            </li>
+        </ul>
+
+        <script>
+
+            /* addClass()  //클레스 추가
+            removeClass()  // 클레스 제거
+            toggleClass()  // 클레스 토글
+            hasClass() // true, false */
+
+            let this2 = 0;
+            $('.s5 li').on('click',function(){                
+/*                 if(this2 !== this){
+                    $('li > div').slideUp();
+                }
+                $(this).find('div').slideToggle(); //display none처리 해놓은것을 펼쳐서 보이게 만들어줌 >트렌스지션 있을시 부자연스러워짐*/
+
+                
+
+/*                 $('li > div').slideUp();
+                $(this).find('div').stop().slideToggle(); //display none처리 해놓은것을 펼쳐서 보이게 만들어줌 */
+
+
+                if(this2 !== this){
+                    $('.s5 li').removeClass('active') //클레스를 넣어 조절 > 좀뚝뚝끈김
+                }
+                
+                $(this).stop().toggleClass('active')
+                this2=this; 
+            })
+        </script>
+    </article>
+    
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <article>
+        <h2>데이터 출력</h2>
+        <div class = 'list'>
+            <p>이름</p>
+        </div>
+    </article>
+
+
+    <script>
+        // json문서 불러오기
+        fetch('./data.json')
+        .then(function(res){ return res.json()}) //문자열 > 객체 중가로에서 값을 밖으로 내보낼때 return이 필요
+        .then(function(data){
+            console.log(data.member,
+            data.member[0].name
+            )
+
+            data.member.forEach((v,k)=> {
+
+                console.log(v);
+
+                
+            });
+        }) //객체를 활용 > 프로그래밍
+    </script>
+</body>
+</html>

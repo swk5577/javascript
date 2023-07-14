@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문자 찾기</title>
+</head>
+<body>
+    
+    <article>
+        <h2>이미지명 바꾸기</h2>
+        <img id = img src="./img/05.jpg" alt="">
+
+        <script>
+            let str = img.src, startIndex = str.lastIndexOf('/'), endIndex = str.lastIndexOf('.'), find =str.slice(startIndex+1, endIndex) ;
+
+            console.log(
+                str.replace(find,'02')
+            );
+            img.src = str.replace(find,'02')
+
+            let str2 = img.src;
+            
+            console.log(
+                str2.replace(str2.slice(str2.lastIndexOf('.')),'_on'+(str2.slice(str2.lastIndexOf('.'))))
+            );
+            console.log(
+                window.location.hash.split('-')
+
+            );
+                
+
+
+        </script>
+    </article>
+</body>
+</html>

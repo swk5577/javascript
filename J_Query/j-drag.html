@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery UI Draggable - Default functionality</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<style>
+    #draggable { width: 150px; height: 150px; padding: 0.5em; }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+$( function() {
+$( "#draggable" ).draggable();
+} );
+</script>
+</head>
+
+
+<body>
+
+    <div id="draggable" class="ui-widget-content">
+    <p>Drag me around</p>
+    </div>
+
+    <div class="content">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+    </div>
+
+    <style>
+        .content{
+            width: 30%; margin: 100px auto;
+            border: 1px solid black; overflow: hidden;
+        }
+        .content ul{
+            display: flex;
+            margin: 0; padding: 0; list-style: none;
+        }
+
+        .content ul li{
+            width: 100%;
+            height : 300px;
+            flex-shrink: 0;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: blueviolet;
+            border: 1px solid black;
+        }
+    </style>
+
+    <script>
+        let pos = {sX:0,dX:0}, 
+            inft = function(re){
+
+        };
+
+        $('.content ul').draggable({
+            axis:"x", //x 좌표에서만 움직임
+            cursor:"move", //마우스 변경
+            /* containment:".content", */ //부모의 영역안에서만 움직임 가능
+            
+            start:function(e){pos.sX = e.clientX;},
+            drag:function(e){pos.dX = e.clientX;},
+            stop:function(e){},
+            revert:function(){//원래자리로 돌아감
+                let re = Math.abs(pos.dX - pos.sX) , ft = false;
+                console.log($('.content').width()-re);
+                
+                ft = (re > ($('.content').width()*0.3)) ? false : true;  //abs가장큰수에서 작은수를 빼줌
+                
+                console.log(ft);
+                ft ? "" : (inft(re));
+                
+                
+                
+                return ft
+            }
+        });
+    </script>
+</body>
+</html>

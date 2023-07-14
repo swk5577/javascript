@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        window.onclick = function(){
+
+        window.localStorage.num = 1000; // 로컬 스토리지로 들어간다 > 기한이 없음 > 지워지지않음
+        window.localStorage.setItem('num2',2000); //위랑 같은거
+
+        window.sessionStorage.num = 1000; // 세션 스토리지로 들어간다 > 기한이 없음 > 홈페이지를 껏다키면 모두 사라짐
+        window.sessionStorage.setItem('num2',2000); //위랑 같은거
+
+        // window.localStorage.removeItem('num'); //지우기 - window. 은 생략가능
+        // localStorage.clear(); // 모두지우기
+
+        console.log(
+            localStorage.num,
+            localStorage.getItem('num2')
+        );
+    }
+    </script>
+</body>
+</html>
