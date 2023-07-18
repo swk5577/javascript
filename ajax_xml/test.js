@@ -20,6 +20,90 @@ $.ajax({
          $('#main').append(tag);
       })
 
+         let num;
+      $('.thumb').on('click',function(e){
+         e.preventDefault()
+
+         detail = $(this).find('>a').attr('href');
+         name = $(this).find('>h2').text();
+         num = $(this)
+
+         $('.pic img').attr('src',detail)
+         $('.caption h2').text(name)
+         
+         
+         $('.poptrox-overlay').show();
+      })
+
+      console.log(num = $('.thumb').first());
+
+
+      $('.nav-previous').on('click', function(){
+
+
+         if((num).index() == 0){
+
+            num = $('.thumb').last()
+
+            detail =$(num).find('>a').attr('href');
+            name = $(num).find('>h2').text();
+
+            $('.pic img').attr('src',detail)
+            $('.caption h2').text(name)
+         
+         }else{
+            num = num.prev()
+
+            detail =$(num).find('>a').attr('href');
+            name = $(num).find('>h2').text();
+
+            $('.pic img').attr('src',detail)
+            $('.caption h2').text(name)
+
+
+         }
+
+      })
+
+
+
+      $('.nav-next').on('click',function(){
+
+         console.log(num.index());
+
+
+         if((num).index() == 11){
+
+            num = $('.thumb').first()
+
+            detail =$(num).find('>a').attr('href');
+            name = $(num).find('>h2').text();
+
+            $('.pic img').attr('src',detail)
+            $('.caption h2').text(name)
+         
+         }else{
+            num = num.next()
+
+            detail = $(num).find('>a').attr('href');
+            name = $(num).find('>h2').text();
+
+            $('.pic img').attr('src',detail)
+            $('.caption h2').text(name)
+
+
+         }
+         
+      })
+
+
+
+      $('.closer').on('click',function(){
+         $('.poptrox-overlay').hide();
+      })
    },
    error: function () { }
+
 });
+
+

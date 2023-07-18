@@ -1,4 +1,4 @@
- $.ajax({
+$.ajax({
     url:"./data.json",
     success:function(data){ 
         //$('다중선택자').each(function(){     });
@@ -44,4 +44,4 @@
         
     },
     error:function(){}
- });
+});
